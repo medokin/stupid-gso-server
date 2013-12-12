@@ -1,0 +1,15 @@
+{
+  "name": "api-gso-server",
+  "version": "0.0.0",
+  "description": "API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://medokin@bitbucket.org/medokin/stupid-gso-server.git"
+  },
+  "author": "Nikodem Jaworski <nikodemjaworski@gmail.com>",
+  "license": "MIT"
+}
