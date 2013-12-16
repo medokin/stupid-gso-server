@@ -19,6 +19,7 @@
     "request": "~2.29.0",
     "memory-cache": "0.0.5",
     "consolidate": "~0.10.0",
-    "swig": "~1.2.2"
+    "swig": "~1.2.2",
+    "rsvp": "~2.0.4"
   }
 }

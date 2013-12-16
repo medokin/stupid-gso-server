@@ -1,0 +1,7 @@
+{
+  "name": "stupid-gso-server",
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "highlightjs": "~7.5.0"
+  }
+}

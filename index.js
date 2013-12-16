@@ -9,7 +9,7 @@ app.set('views', __dirname + '/views');
 app.set('view cache', false);
 
 app.use(express.logger('dev'));
-
+app.use(express.static('public'))
 require('./routes')(app);
 
 app.listen(8000);

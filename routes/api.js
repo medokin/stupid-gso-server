@@ -3,6 +3,12 @@ module.exports = function (app) {
     var parser = require('../lib/parser');
     var DAY = 86400000;
     
+    // Allow Crosssite scripting for every api call
+    app.all('/v1/*', function(req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
+      next();
+    });   
     
     // GET /types
     // Returns an array of available types
