@@ -4,15 +4,16 @@ module.exports = function (app) {
     var DAY = 86400000;
     
     
-    // Get element list by type
-    app.get("/types", function (req, res) {
+    // GET /types
+    // Returns an array of available types
+    app.get("/v1/types", function (req, res) {
         res.json(['classes', 'teachers', 'rooms']);
     });
     
     
     // GET /weeks
     // Returns an array with available weeks numbers
-    app.get("/weeks", function (req, res) {
+    app.get("/v1/weeks", function (req, res) {
         
         request('http://stupid.gso-koeln.de/frames/navbar.htm', DAY, function (body) {
             
@@ -26,7 +27,7 @@ module.exports = function (app) {
     
     // GET /elements/:type
     // Returns an array with all available elements for given type
-    app.get("/elements/:type(teachers|classes|rooms)", function (req, res) {
+    app.get("/v1/elements/:type(teachers|classes|rooms)", function (req, res) {
         
         request('http://stupid.gso-koeln.de/frames/navbar.htm', DAY, function (body) {
             
@@ -38,9 +39,9 @@ module.exports = function (app) {
         
     });
     
-    // GET /timetable/:type/:element
-    // Returns an array with all available elements for given type
-    app.get("/timetable/:type/:element/:week", function (req, res) {
+    // GET /timetable/:type/:element/:week
+    // Returns an array of lessons for given type, element and week
+    app.get("/v1/timetable/:type/:element/:week", function (req, res) {
         
         request('http://stupid.gso-koeln.de/frames/navbar.htm', DAY, function (body) {
             
@@ -52,7 +53,7 @@ module.exports = function (app) {
                     rooms: 'r'
                 };
                 
-                request('http://stupid.gso-koeln.de/' + req.params.week + '/' + typesMap[req.params.type] + '/' + typesMap[req.params.type] + remoteId + '.htm', DAY, function(body){
+                request('http://stupid.gso-koeln.de/' + req.params.week + '/' + typesMap[req.params.type] + '/' + typesMap[req.params.type] + remoteId + '.htm', 1000, function(body){
                     parser.timetable.parse(body, function(result){
                        res.send(result); 
                     });

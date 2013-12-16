@@ -17,6 +17,8 @@
     "connect": "~2.12.0",
     "express": "~3.4.7",
     "request": "~2.29.0",
-    "memory-cache": "0.0.5"
+    "memory-cache": "0.0.5",
+    "consolidate": "~0.10.0",
+    "swig": "~1.2.2"
   }
 }
