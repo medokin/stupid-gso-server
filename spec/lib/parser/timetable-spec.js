@@ -123,7 +123,8 @@ describe("On parsing timetable", function() {
     });
     
     
-    it("it should match first lesson", function() {
+    it("it should match lesson", function() {
+      var result = null;
       var expected = {
         hour: 1,
         day: 3,
@@ -131,9 +132,18 @@ describe("On parsing timetable", function() {
         changed: false
       }
       var fileContent = fs.readFileSync("spec/mocks/timetable.htm");
-      parser.timetable.parse(fileContent, function(content){
-        expect(content[0]).toEqual(expected);
+      
+      parser.timetable.parse(fileContent).then(function(content){
+        result = content;
       });
+      
+      waitsFor(function(){
+        return result;
+      });
+      
+      runs(function(){
+        expect(result[0]).toEqual(expected);
+      })
       
     });
     
@@ -144,10 +154,76 @@ describe("On parsing timetable", function() {
         text: ['KP', 'C114', 'BTP'],
         changed: false
       }
+      var result = null;
       var fileContent = fs.readFileSync("spec/mocks/timetable.htm");
-      parser.timetable.parse(fileContent, function(content){
-        expect(content[1]).toEqual(expected);
+      
+      parser.timetable.parse(fileContent).then(function(content){
+        result = content;
       });
+      
+      waitsFor(function(){
+        return result;
+      });
+      
+      runs(function(){
+        expect(result[1]).toEqual(expected);
+      })
+      
+    });
+    
+    it("it should be the third lesson on friday", function() {
+      var expected = {
+        hour: 3,
+        day: 5,
+        text: ['HL', 'C105', 'MPO'],
+        changed: false
+      }
+      var result = null;
+      var fileContent = fs.readFileSync("spec/mocks/timetable.htm");
+      
+      parser.timetable.parse(fileContent).then(function(content){
+        content.forEach(function(item){
+          if(item.day == 5 && item.hour == 3){
+            result = item;
+          }
+        })
+      });
+      
+      waitsFor(function(){
+        return result;
+      });
+      
+      runs(function(){
+        expect(result).toEqual(expected);
+      })
+      
+    });
+    
+    it("it should be the nineth lesson on monday", function() {
+      var expected = {
+        hour: 9,
+        day: 1,
+        text: ['ST', 'C103', 'BTP'],
+        changed: false
+      }
+      var result = null;
+      var fileContent = fs.readFileSync("spec/mocks/timetable.htm");
+      
+      parser.timetable.parse(fileContent).then(function(content){
+        content.forEach(function(item){
+          if(item.day == 1 && item.hour == 9){
+            result = item;
+          }
+        })
+      });
+      
+      waitsFor(function(){
+        return result;
+      });
+      
+      runs(function(){
+        expect(result).toEqual(expected);
+      })
       
     });
     
