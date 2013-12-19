@@ -4,6 +4,8 @@ Welcome to StupidGSO-Server!
 [![Build Status](https://travis-ci.org/medokin/stupid-gso-server.png?branch=master)](https://travis-ci.org/medokin/stupid-gso-server)
 [![Code Climate](https://codeclimate.com/github/medokin/stupid-gso-server.png)](https://codeclimate.com/github/medokin/stupid-gso-server)
 
+Live-Version and API description: [api.gso.medok.in][2]
+
 How to install
 ---------
 
@@ -51,3 +53,5 @@ You can also use our client. The code can be found here: [StupidGSO-Client][1]
 
 
   [1]: https://github.com/medokin/stupid-gso-client
+  [2]: http://api.gso.medok.in
+
