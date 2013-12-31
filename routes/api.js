@@ -3,6 +3,7 @@
 module.exports = function (app) {
     var request = require('../lib/request');
     var parser = require('../lib/parser');
+    var strPad = require('../lib/strPad');
     var DAY = 86400000;
     
     // Allow Crosssite scripting for every api call
@@ -65,7 +66,7 @@ module.exports = function (app) {
           rooms: 'r'
         };
                 
-        return request('http://stupid.gso-koeln.de/' + req.params.week + '/' + typesMap[req.params.type] + '/' + typesMap[req.params.type] + remoteId + '.htm', 1000);
+        return request('http://stupid.gso-koeln.de/' + strPad(req.params.week,2) + '/' + typesMap[req.params.type] + '/' + typesMap[req.params.type] + remoteId + '.htm', 1000);
       
       })
       .then(function(content){
