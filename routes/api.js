@@ -1,9 +1,9 @@
 
 
 module.exports = function (app) {
-    var request = require('../lib/request');
+    var request = require('../lib/helper/request');
     var parser = require('../lib/parser');
-    var strPad = require('../lib/strPad');
+    var strPad = require('../lib/helper/strPad');
     var DAY = 86400000;
     
     // Allow Crosssite scripting for every api call

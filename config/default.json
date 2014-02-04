@@ -1,0 +1,9 @@
+{
+  "sequelize": {
+    "user": "",
+    "password": "",
+    "database": "",
+    "host": "default",
+    "dialect": "mysql"
+  }
+}

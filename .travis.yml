@@ -1,6 +1,12 @@
 language: node_js
+
 node_js:
   - "0.10"
   - "0.8"
+  
+services:
+  - "mysql"
+
 before_script:
-  - "npm i -g jasmine-node"
+  - "npm i -g grunt-cli jasmine-node sequelize"
+  - "sequelize -m"

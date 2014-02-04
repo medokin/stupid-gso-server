@@ -1,4 +1,4 @@
-var request = require("../../lib/request");
+var request = require("../../lib/helper/request");
 
 describe("On http request", function() {
   var httpServer = null;
