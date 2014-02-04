@@ -3,6 +3,7 @@ Welcome to StupidGSO-Server!
 
 [![Build Status](https://travis-ci.org/medokin/stupid-gso-server.png?branch=master)](https://travis-ci.org/medokin/stupid-gso-server)
 [![Code Climate](https://codeclimate.com/github/medokin/stupid-gso-server.png)](https://codeclimate.com/github/medokin/stupid-gso-server)
+[![Dependency Status](https://david-dm.org/medokin/stupid-gso-server.png)](https://david-dm.org/medokin/stupid-gso-server)
 
 Live-Version and API description: [api.gso.medok.in][2]
 
