@@ -1,24 +1,17 @@
-var express = require('express');
-var engines = require('consolidate');
+var Hapi = require('hapi');
 
-var app = express();
+// Create a server with a host and port
+var server = Hapi.createServer('localhost', 8888, { cors: true });
 
-// View Config
-app.engine('html', engines.swig);
-app.set('view engine', 'html');
-app.set('views', __dirname + '/views');
-app.set('view cache', false);
+// Add the route
+server.route({
+    method: 'GET',
+    path: '/',
+    handler: function (request, reply) {
+        console.log('test');
+        reply('hello world');
+    }
+});
 
-// Cache and Compress
-var month = 60*60*24*30*24*30;
-app.use(express.compress());
-app.use(express.static('public', { maxAge: month }));
-
-
-//Logger
-app.use(express.logger('dev'));
-
-// Load Routes
-require('./routes')(app);
-
-app.listen(3001);
+console.log('starting server on 8080')
+server.start();
