@@ -13,6 +13,11 @@
   "author": "Nikodem Jaworski <nikodemjaworski@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "hapi": "^4.0.0"
+    "stupid-gso": "^0.2.1",
+    "hapi": "^4.0.0",
+    "hoek": "^2.1.0",
+    "lout": "^3.1.0",
+    "furball": "^1.0.1",
+    "joi": "^3.1.0"
   }
 }

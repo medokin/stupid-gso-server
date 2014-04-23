@@ -1,17 +1,64 @@
 var Hapi = require('hapi');
+var Joi = require("joi");
+var Stupid = require('stupid-gso');
 
-// Create a server with a host and port
-var server = Hapi.createServer('localhost', 8888, { cors: true });
+var server = new Hapi.Server('localhost', 8888);
 
-// Add the route
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function (request, reply) {
-        console.log('test');
-        reply('hello world');
+var gso = new Stupid('FIA23Jaworski', 'njnj', 'njApi');
+
+
+var teachers = function (request, reply) {
+    gso.teachers().then(function (teachers) {
+        reply(teachers);
+    }, function () {
+        reply("error");
+    });
+};
+
+var classes = function (request, reply) {
+    gso.teachers().then(function (teachers) {
+        reply(teachers);
+    }, function () {
+        reply("error");
+    });
+};
+
+var routes = [
+    {
+        method: 'GET',
+        path: '/teachers',
+        config: {
+            handler: teachers,
+            tags: ['vanilla'],
+            description: 'Fetch all teachers',
+            notes: 'No parameters',
+            cache: {
+                expiresIn: 50000
+            }
+        }
+    },
+    {
+        method: 'GET',
+        path: '/classes',
+        config: {
+            handler: classes,
+            tags: ['vanilla'],
+            description: 'Fetch all classes',
+            notes: 'No parameters',
+            cache: {
+                expiresIn: 50000
+            }
+        }
     }
-});
+];
 
-console.log('starting server on 8080')
-server.start();
+server.route(routes);
+
+
+server.pack.require('lout', function (err) {
+    if (err) throw err;
+
+    server.start(function () {
+        console.log("Hapi server started @ " + server.info.uri);
+    });
+});
