@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>StupidGso Api</title>
+
+    <!-- Swagger -->
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
     <link href='/docs/swaggerui/css/highlight.default.css' media='screen' rel='stylesheet' type='text/css'/>
     <link href='/docs/swaggerui/css/screen.css' media='screen' rel='stylesheet' type='text/css'/>
@@ -49,12 +56,79 @@
             window.swaggerUi.load();
         });
     </script>
+
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            margin-top: 70px;
+        }
+
+        .swagger-ui-wrap {
+            line-height: 1;
+            font-family: "Droid Sans", sans-serif;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        #swagger .container{
+            padding: 0;
+        }
+    </style>
 </head>
-<body>
-<section id="swagger">
-    <h1 class="entry-title api-title">API</h1>
-    <div id="message-bar" class="swagger-ui-wrap"></div>
-    <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
-</section>
+<body data-spy="scroll" data-target=".sidebar">
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">StupidGso API</a>
+        </div>
+        <div class="navbar-collapse collapse sidebar">
+            <ul class="nav navbar-nav">
+                <li><a href="#intro">Einleitung</a></li>
+                <li><a href="#api">Dokumentation</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h2 id="intro">StupidGSO API</h2>
+            <hr>
+            <p>StupidGSO Api ist eine REST-basierte Schnittstelle zum Stundenplan des Georg-Simon-Ohm-Berufskollegs in Köln (GSO).</p>
+            <p>Der originale Stundenplan ist <a href="https://webuntis.stadt-koeln.de/WebUntis/?school=K175055#main">hier</a> zu finden und eine Mobile-optimierte Version anhand dieser API <a href="http://gso.medok.in/">hier</a></p>
+            <p>Diese Schnittstelle holt den originalen Stundenplan und dessen Bausteine von der GSO-Seite und Übersetzt diese. Alle Daten werden aus Performancegründen für eine variable Zeit zwischengespeichert.</p>
+
+            <h2 id="api">Interaktive Dokumentation</h2>
+            <hr>
+
+            <section id="swagger">
+                <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
+            </section>
+
+
+            <hr>
+            <p>Impressum - Nikodem Jaworski - Offermannsheiderstraße 180 - 51515 Kürten - nikodemjaworski@gmail.com</p>
+        </div>
+
+    </div>
+
+</div> <!-- /container -->
+
+
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

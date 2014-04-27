@@ -26,13 +26,7 @@ server.pack.require({'hapi-swagger': swaggerOptions}, function (err) {
   }
 });
 
-server.pack.require({'lout': {endpoint: '/lout'}}, function(err) {
-  if (!err && err !== null) {
-    server.log(['error'], 'Plugin "lout" load error: ' + err)
-  } else {
-    server.log(['start'], 'lout interface loaded')
-  }
-});
+
 server.on('internalError', function (request, err) {
   console.log('Error response (500) sent for request: ' + request.id + ' because: ' + err.message);
 });

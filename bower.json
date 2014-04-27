@@ -1,5 +1,6 @@
 {
   "name": "stupid-gso-server",
   "dependencies": {
+    "bootstrap": "~3.1.1"
   }
 }

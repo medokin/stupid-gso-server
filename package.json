@@ -14,12 +14,13 @@
   "license": "MIT",
   "dependencies": {
     "stupid-gso": "^0.2.1",
-    "hapi": "^4.0.0",
+    "hapi": "4.0.0",
     "hoek": "^2.1.0",
     "joi": "^3.1.0",
     "boom": "^2.4.1",
     "hapi-swagger": "~0.1.10",
     "handlebars": "~2.0.0-alpha.2",
-    "moment": "~2.6.0"
+    "moment": "~2.6.0",
+    "lodash": "^2.4.1"
   }
 }
