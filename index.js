@@ -17,7 +17,7 @@ server.views({
   path: 'views'
 });
 
-server.route(require('./routes'));
+server.route(require('./router')(server));
 
 
 var swaggerOptions = {

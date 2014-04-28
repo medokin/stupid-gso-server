@@ -177,7 +177,7 @@ var lastImport = function (request, reply) {
     });
 };
 
-module.exports = [
+var routes = [
     {
         method: 'GET',
         path: '/',
@@ -617,4 +617,8 @@ module.exports = [
         }
     }
 ];
+
+module.exports = function(server){
+    return routes;
+}
 
