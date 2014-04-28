@@ -5,7 +5,7 @@ var moment = require('moment');
 var _ = require('lodash');
 
 
-var gso = new Stupid('FIA23Jaworski', 'njnj', 'njApi');
+var gso = new Stupid('user', '', 'njApi');
 
 var teachers = function (request, reply) {
     gso.teachers().then(function (teachers) {
