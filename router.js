@@ -1,11 +1,11 @@
 var fs = require('fs');
 
-module.exports = function (server) {
-    var routes  = null;
-    require("fs").readdirSync("./routes").forEach(function (file) {
-        console.log('loaded: ' + file);
-        routes =  require("./routes/" + file)(server);
-    });
+module.exports = function (app) {
+  var routes = [];
+  require("fs").readdirSync("./routes").forEach(function (file) {
+    route = require("./routes/" + file)(app);
+    routes.push(route);
+  });
 
-    return routes;
+  return routes;
 }

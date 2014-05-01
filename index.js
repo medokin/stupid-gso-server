@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
-
+var Stupid = require('stupid-gso');
+var untis = new Stupid('user', '', 'njApi');
 
 var server = new Hapi.Server('localhost', 8888, {
   state: {
@@ -17,8 +18,17 @@ server.views({
   path: 'views'
 });
 
-server.route(require('./router')(server));
+var app = {
+  server: server,
+  untis: untis
+}
 
+server.route(require('./router')(app));
+
+require("fs").readdirSync("./methods").forEach(function (file) {
+  var method = require("./methods/" + file)(app);
+  app.server.method(method);
+});
 
 var swaggerOptions = {
   basePath: 'http://localhost:8888',
