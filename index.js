@@ -3,6 +3,7 @@ var Stupid = require('stupid-gso');
 var untis = new Stupid('user', '', 'njApi');
 
 var server = new Hapi.Server('localhost', 8888, {
+  cors: true,
   state: {
     cookies: {
       failAction: 'log'
@@ -55,4 +56,3 @@ server.on('internalError', function (request, err) {
 server.start(function () {
   console.log("Hapi server started @ " + server.info.uri);
 });
-
