@@ -6,7 +6,7 @@ var moment = require('moment');
 module.exports = function (app) {
 
   var handler = function (request, reply) {
-    app.until.latestImportTime().then(function (lastImport) {
+    app.untis.latestImportTime().then(function (lastImport) {
       reply({
         result: moment(lastImport).format(),
         meta: {

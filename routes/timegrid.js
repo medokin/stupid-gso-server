@@ -6,7 +6,7 @@ var moment = require('moment');
 module.exports = function (app) {
 
   var handler = function (request, reply) {
-    app.until.timegridUnits().then(function (timegrid) {
+    app.untis.timegrid().then(function (timegrid) {
       reply({
         result: timegrid,
         meta: {
