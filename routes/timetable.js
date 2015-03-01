@@ -4,6 +4,16 @@ var moment = require('moment');
 var _ = require('lodash');
 var RSVP = require('rsvp');
 
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+
 module.exports = function (app) {
 
   var handler = function (request, reply) {
@@ -22,11 +32,14 @@ module.exports = function (app) {
               app.server.methods.getSubjects(function(err, subjects){
                 app.server.methods.getClasses(function(err, classes){
                   app.server.methods.getRooms(function(err, rooms){
-                    resolve({
-                      classes: classes,
-                      subjects: subjects,
-                      rooms: rooms,
-                      teachers: teachers
+                    app.server.methods.getSubstitutions(startDate, endDate, null, function(err, substitutions){
+                      resolve({
+                        classes: classes,
+                        subjects: subjects,
+                        rooms: rooms,
+                        teachers: teachers,
+                        substitutions: substitutions
+                      })
                     })
                   })
                 })
@@ -42,7 +55,78 @@ module.exports = function (app) {
         .then(function(result){
           var timetable = result.timetable;
 
-          var timetable = _.map(timetable, function(lesson){
+          var reschedules = _.filter(result.elements.substitutions, {type: 'shift'});
+          var roomChanges = _.filter(result.elements.substitutions, {type: 'rmchg'});
+
+          var timetableWithReschedules = _.map(timetable, function(lesson){
+            _.forEach(reschedules, function(n, key) {
+              if(lesson.date == n.date &&
+                lesson.startTime.hour == n.startTime.hour &&
+                lesson.startTime.minutes == n.startTime.minutes){
+                if(request.params.type === 1){
+                  var intersections = _.intersection(lesson.classes, n.classes);
+                  if(intersections.length !== 0){
+                    n.code =  'shift';
+                    lesson = clone(n);
+                  }
+                }
+                if(request.params.type === 2){
+                  var intersections = _.intersection(lesson.teachers, n.teachers);
+                  if(intersections.length !== 0){
+                    n.code =  'shift';
+                    lesson = clone(n);
+                  }
+                }
+                if(request.params.type === 4){
+                  var intersections = _.intersection(lesson.rooms, n.rooms);
+                  if(intersections.length !== 0){
+                    n.code =  'shift';
+                    lesson = clone(n);
+                  }
+                }
+              }
+            });
+
+            return lesson;
+          });
+
+          timetableWithReschedules = _.uniq(timetableWithReschedules, function(item){
+            return JSON.stringify(item);
+          });
+
+          var timetableWithRoomChanges = _.map(timetableWithReschedules, function(lesson){
+            _.forEach(roomChanges, function(n, key) {
+              if(lesson.date == n.date &&
+                lesson.startTime.hour == n.startTime.hour &&
+                lesson.startTime.minutes == n.startTime.minutes){
+                  if(request.params.type === 1){
+                    var intersections = _.intersection(lesson.classes, n.classes);
+                    if(intersections.length !== 0){
+                      n.code =  'roomChange';
+                      lesson = clone(n);
+                    }
+                  }
+                  if(request.params.type === 2){
+                    var intersections = _.intersection(lesson.teachers, n.teachers);
+                    if(intersections.length !== 0){
+                      n.code =  'roomChange';
+                      lesson = clone(n);
+                    }
+                  }
+                  if(request.params.type === 4){
+                    var intersections = _.intersection(lesson.rooms, n.rooms);
+                    if(intersections.length !== 0){
+                      n.code =  'roomChange';
+                      lesson = clone(n);
+                    }
+                  }
+              }
+            });
+
+            return lesson;
+          });
+
+          var result = _.map(timetableWithRoomChanges, function(lesson){
             var teachers = [];
             lesson.teachers.forEach(function(id){
               var test = _.find(result.elements.teachers, {id: id});
@@ -66,16 +150,22 @@ module.exports = function (app) {
 
             var rooms = [];
             lesson.rooms.forEach(function(id){
+              if(lesson.type === 'shift'){
+                console.log(id);
+              }
               var test = _.find(result.elements.rooms, {id: id});
               rooms.push(test);
             });
             lesson.rooms = rooms;
 
+            if(lesson.type === 'shift'){
+              console.log(lesson.date, lesson.startTime);
+            }
             return lesson;
           });
 
 
-          return timetable
+          return result;
         })
         .then(function (timetable) {
       reply({
