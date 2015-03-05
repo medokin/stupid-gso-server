@@ -1,6 +1,6 @@
 {
   "name": "api-gso-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "API",
   "main": "index.js",
   "scripts": {
@@ -13,13 +13,17 @@
   "author": "Nikodem Jaworski <nikodemjaworski@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "cheerio": "~0.12.4",
-    "connect": "~2.12.0",
-    "express": "~3.4.7",
-    "request": "~2.29.0",
-    "memory-cache": "0.0.5",
-    "consolidate": "~0.10.0",
-    "swig": "~1.2.2",
-    "rsvp": "~2.0.4"
+    "stupid-gso": "^0.2.3",
+    "hapi": "4.0.0",
+    "hoek": "2.1.0",
+    "joi": "3.1.0",
+    "boom": "2.4.1",
+    "hapi-swagger": "0.1.10",
+    "handlebars": "~2.0.0-alpha.2",
+    "moment": "~2.6.0",
+    "lodash": "^2.4.1",
+    "catbox": "~2.2.0",
+    "catbox-memory": "~1.0.1",
+    "rsvp": "~3.0.17"
   }
 }
