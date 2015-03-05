@@ -2,7 +2,7 @@ var Hapi = require('hapi');
 var Stupid = require('stupid-gso');
 var untis = new Stupid(process.env.GSO_USER, process.env.GSO_PASS, 'njApi');
 
-var server = new Hapi.Server('127.0.0.1', 8888, {
+var server = new Hapi.Server('0.0.0.0', 8888, {
   cors: true,
   state: {
     cookies: {
