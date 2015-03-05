@@ -32,7 +32,7 @@ require("fs").readdirSync("./methods").forEach(function (file) {
 });
 
 var swaggerOptions = {
-  basePath: '/',
+  basePath: '',
   apiVersion: '1'
 };
 
