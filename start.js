@@ -1,6 +1,6 @@
 var Hapi = require('hapi');
 var Stupid = require('stupid-gso');
-var untis = new Stupid('user', '', 'njApi');
+var untis = new Stupid(process.env.GSO_USER, process.env.GSO_PASS, 'njApi');
 
 var server = new Hapi.Server('localhost', 8888, {
   cors: true,
